@@ -7,8 +7,8 @@ class HeartBeat
 
   def initialize
     @directory = ENV['DIRECTORY']
-    @interval = 1
-    @notify_delay = 10
+    @interval = ENV['INTERVAL'].to_i
+    @notify_delay = ENV['DELAY'].to_i
 
     @last_notice = Time.now - @notify_delay
   end
