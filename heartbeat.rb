@@ -16,8 +16,6 @@ class HeartBeat
   def start
     while true
 
-      puts 'tick'
-
       if File.directory?(@directory)
         status = "OK"
       else
@@ -45,7 +43,6 @@ class HeartBeat
     if Time.now > @last_notice + @notify_delay
       send_sms
       @last_notice = Time.now
-      puts @last_notice
     end
 
   end
@@ -58,6 +55,7 @@ class HeartBeat
       to: ENV['CELL_NUMBERS'],
       body: "Server drop detected at #{Time.now}"
     )
+
   end
 
 end
