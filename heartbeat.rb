@@ -19,11 +19,13 @@ class HeartBeat
       puts 'tick'
 
       if File.directory?(@directory)
-        puts "server ok"
+        status = "OK"
       else
+        status = "DOWN"
         send_notice
       end
 
+      log_time status
       sleep(@interval)
 
     end
@@ -31,6 +33,12 @@ class HeartBeat
   end
 
   private
+
+  def log_time(status)
+    log_file = File.open( "server_status.log","w" )
+    log_file << "Last Check: Server #{status} at #{Time.now}"
+    log_file.close
+  end
 
   def send_notice
 
