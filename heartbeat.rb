@@ -17,7 +17,7 @@ class HeartBeat
     loop do
 
       if File.directory?(@directory)
-        status = "OK"
+        status = "UP"
       else
         status = "DOWN"
         send_notice
@@ -49,13 +49,16 @@ class HeartBeat
 
   def send_sms
 
-    @client = Twilio::REST::Client.new ENV['ACCOUNT_SID'], ENV['AUTH_TOKEN']
-    @client.messages.create(
-      from: ENV['TWILIO_NUMBER'],
-      to: ENV['CELL_NUMBERS'],
-      body: "Server drop detected at #{Time.now}"
-    )
+    recipients = ENV['RECIPIENTS'].split(",")
 
+    recipients.each do |cell_number|
+      @client = Twilio::REST::Client.new ENV['ACCOUNT_SID'], ENV['AUTH_TOKEN']
+      @client.messages.create(
+        from: ENV['TWILIO_NUMBER'],
+        to: cell_number,
+        body: "Server drop detected at #{Time.now}"
+      )
+    end
   end
 
 end
