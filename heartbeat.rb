@@ -6,7 +6,7 @@ Dotenv.load
 class HeartBeat
 
   def initialize
-    @directory = '/bbbbb'
+    @directory = ENV['DIRECTORY']
     @interval = 1
     @notify_delay = 10
 
