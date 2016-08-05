@@ -14,7 +14,7 @@ class HeartBeat
   end
 
   def start
-    while true
+    loop do
 
       if File.directory?(@directory)
         status = "OK"
