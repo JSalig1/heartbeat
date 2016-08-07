@@ -14,6 +14,7 @@ class HeartBeat
   end
 
   def start
+
     loop do
 
       if File.directory?(@directory)
@@ -59,6 +60,7 @@ class HeartBeat
         body: "Server drop detected at #{Time.now}"
       )
     end
+
   end
 
 end
