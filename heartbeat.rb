@@ -35,7 +35,7 @@ class HeartBeat
 
   def log_time(status)
     log_file = File.open( "server_status.log","w" )
-    log_file << "Last Check: Server #{status} at #{Time.now}"
+    log_file << "Last Check: Server #{status} at #{Time.now.asctime}"
     log_file.close
   end
 
@@ -57,7 +57,7 @@ class HeartBeat
       @client.messages.create(
         from: ENV['TWILIO_NUMBER'],
         to: cell_number,
-        body: "Server drop detected at #{Time.now}"
+        body: "Server drop detected at #{Time.now.asctime}"
       )
     end
 
